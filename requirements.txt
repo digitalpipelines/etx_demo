@@ -1,8 +1,10 @@
-asgiref==3.6.0
-dataclasses==0.6
-django-dotenv
 django>=3.2,<3.3
-psycopg2-binary==2.9.5
-pytz==2022.7
-sqlparse==0.4.3
 gunicorn
+psycopg2-binary
+django-dotenv
+django-htmx
+pint
+django-storages
+boto3
+pillow
+requests
