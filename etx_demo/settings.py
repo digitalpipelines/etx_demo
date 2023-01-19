@@ -27,9 +27,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 DEBUG = str(os.environ.get('DEBUG')) == "1" # 1 is True
 
 ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
-ALLOWED_HOSTS = ['stingray-app-vrxnw.ondigitalocean.app']
+ALLOWED_HOSTS = []
 if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get('DJANGO_ALLOWED_HOSTS')]
+    ALLOWED_HOSTS += [os.environ.get('DJANGO_ALLOWED_HOST')]
 print('Allowed hosts ' + str(ALLOWED_HOSTS))    
 print('env Allowed hosts ' + str(ENV_ALLOWED_HOST))   
 
