@@ -55,7 +55,7 @@ jobs:
           token: ${{secrets.DO_CI_KEY}} 
       - name:
         run: |
-          doctl apps update ${{ DO_APP_ID }} --spec .do/app.yaml
+          doctl apps update ${{ secrets.DO_APP_ID }} --spec .do/app.yaml
 
       # - name: Run Collectstatic
       #   env:
