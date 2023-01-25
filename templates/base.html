@@ -1,16 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
-
+        <script src="https://unpkg.com/htmx.org@1.8.5"></script>
+        <link rel='stylesheet' href='{% static "recipes/recipes-htmx.css" %}'/>
     </head>
     <body>
-        <h1> Welcome to the Day Books Sandbox</h1>
-        <form action='/articles/'>
-            <input type="text" name="q"/>
-            <input type="submit" />
-        </form>
+        <h1><a href="/">Sandhauls.com Sandbox</a></h1>
+        {% include 'search/search-form.html' %}
 
         {% block content %}
         {% endblock content %}
+        <script>
+            document.body.addEventListener("htmx:configRequest", event=> {
+                event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}'
+            })
+        </script>
     </body>
 </html>

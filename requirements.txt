@@ -6,5 +6,6 @@ django-htmx
 pint
 django-storages
 boto3
+botocore
 pillow
 requests

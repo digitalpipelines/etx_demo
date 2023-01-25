@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Third Party
+    'django_htmx',
+    'storages',
+    #Internal
     'articles',
+    'recipes',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'etx_demo.urls'
@@ -85,14 +92,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
-    #     "NAME": "django_test",
-    #     "USER": "etxtech",
-    #     "PASSWORD": "", #os.environ.get("DJANGO_DB_PASSWORD", None),
-    #     "HOST":"etxtech-transport-db-do-user-2004999-0.b.db.ondigitalocean.com",
-    #     "PORT":"25060",
-    # }
 }
 
 POSTGRES_DB = os.environ.get("POSTGRES_DB")
@@ -158,6 +157,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static", #os.path.join(BASE_DIR / "static")
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
+
+MEDIA_ROOT = BASE_DIR / "staticfiles-cdn" / 'uploads'
+
+from .cdn.conf import * #noqa -------- Needed for production uploads
+
+
+#https://etxdemo.nyc3.digitaloceanspaces.com
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

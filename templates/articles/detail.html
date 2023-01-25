@@ -6,5 +6,6 @@
 <p>{{object.content}}</p>
 <p>{{object.timestamp}}</p>
 <p>{{object.updated}}</p>
+<p>Author: {% if request.user == object.user %} You {% else %} {{object.user}} {% endif %}</p> 
 
 {% endblock content %}

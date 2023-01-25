@@ -1,0 +1,88 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+databases:
+- engine: PG
+  name: db
+  num_nodes: 1
+  size: professional-xs
+  version: "12"
+envs:
+- key: DEBUG
+  scope: RUN_AND_BUILD_TIME
+  value: "0"
+- key: DJANGO_ALLOWED_HOST
+  scope: RUN_AND_BUILD_TIME
+  value: .ondigitalocean.app
+- key: DJANGO_SUPERUSER_EMAIL
+  scope: RUN_AND_BUILD_TIME
+  value: robb@etxtech.net
+- key: DJANGO_SUPERUSER_USERNAME
+  scope: RUN_AND_BUILD_TIME
+  value: robb
+- key: DJANGO_SUPERUSER_PASSWORD
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: abc123
+- key: DJANGO_SECRET_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: abc123
+- key: POSTGRES_DB
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.DATABASE}
+- key: POSTGRES_HOST
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.HOSTNAME}
+- key: POSTGRES_USER
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.USERNAME}
+- key: POSTGRES_PASSWORD
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.PASSWORD}
+- key: POSTGRES_PORT
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.PORT}
+- key: AWS_ACCESS_KEY_ID
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: abc123
+- key: AWS_SECRET_ACCESS_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: abc123
+- key: AWS_STORAGE_BUCKET_NAME
+  scope: RUN_AND_BUILD_TIME
+  value: etxdemo
+jobs:
+- environment_slug: python
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: digitalpipelines/etx_demo
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  kind: PRE_DEPLOY
+  name: etx-predeploy-job
+  run_command: python manage.py migrate --noinput
+  source_dir: /
+name: etxdemo-cli
+region: nyc
+services:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: digitalpipelines/etx_demo
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xs
+  name: etx-demo
+  routes:
+  - path: /
+  run_command: gunicorn --worker-tmp-dir /dev/shm etx_demo.wsgi
+  source_dir: /

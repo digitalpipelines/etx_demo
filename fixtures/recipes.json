@@ -1,0 +1,62 @@
+Allowed hosts []
+env Allowed hosts None
+[
+{
+    "model": "recipes.recipe",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "name": "Chili",
+        "description": "Texas Chili",
+        "directions": "Add all the stuff together",
+        "timestamp": "2023-01-20T21:39:52.038Z",
+        "updated": "2023-01-23T16:37:11.160Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipe",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "name": "Iced Tea",
+        "description": "How to make iced tea",
+        "directions": "Do stuff",
+        "timestamp": "2023-01-22T20:12:49.763Z",
+        "updated": "2023-01-22T20:12:49.763Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 1,
+    "fields": {
+        "recipe": 1,
+        "name": "Whole Tomatoes",
+        "description": "Canned Whole Tomatoes",
+        "quanity": "1",
+        "quanity_as_float": 1.0,
+        "unit": "oz",
+        "directions": "",
+        "timestamp": "2023-01-20T22:07:42.190Z",
+        "updated": "2023-01-23T16:37:11.430Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 3,
+    "fields": {
+        "recipe": 1,
+        "name": "Ground Beef",
+        "description": "",
+        "quanity": "1",
+        "quanity_as_float": 1.0,
+        "unit": "pound",
+        "directions": "",
+        "timestamp": "2023-01-20T23:54:49.023Z",
+        "updated": "2023-01-23T16:37:11.662Z",
+        "active": true
+    }
+}
+]
