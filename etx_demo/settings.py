@@ -65,6 +65,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'etx_demo.urls'
 LOGIN_URL = '/login/'
 
+ADMINS = [('Demo Admin', 'test@test.com'),]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
