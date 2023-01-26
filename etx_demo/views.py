@@ -8,10 +8,14 @@ from django.template.loader import render_to_string
 def home_view(request, *args, **kwargs):
     # Takes a request and returns a webpage
     print(args, kwargs) 
-    
-    article_obj = Article.objects.get(id=2)
 
+    article_obj = Article.objects.all().first()
     article_queryset = Article.objects.all()
+    
+    context = {
+        "object_list": article_queryset,
+        "object": article_obj,
+    } 
 
     context = {
         "object_list": article_queryset,
