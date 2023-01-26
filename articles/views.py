@@ -18,6 +18,7 @@ def article_search_view (request):
 def article_detail_view (request, slug=None):
     article_obj = None
     if slug is not None:
+        print('slug is not none')
         try:
             article_obj = Article.objects.get(slug=slug)
         except Article.DoesNotExist:
@@ -40,7 +41,6 @@ def article_create_view (request ):
     if form.is_valid():
         article_object = form.save() 
         context['form'] = ArticleForm() 
-        return redirect('article-detail', slug=article_object.slug)
-        # context['object'] = article_object
-        # context['created'] = True
+        print('form is valid')
+        return redirect(article_object.get_absolute_url())
     return render(request, "articles/create.html", context=context)     

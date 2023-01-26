@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -24,14 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 1 #str(os.environ.get('DEBUG')) == "1" # 1 is True
+DEBUG = str(os.environ.get('DEBUG')) == "1" # 1 is True
 
-ENV_ALLOWED_HOST = '*'#os.environ.get('DJANGO_ALLOWED_HOST') or None
-ALLOWED_HOSTS = ['127.0.0.1','stingray-app-vrxnw.ondigitalocean.app']
-# if not DEBUG:
-#     ALLOWED_HOSTS += [os.environ.get('DJANGO_ALLOWED_HOST')]
-# print('Allowed hosts ' + str(ALLOWED_HOSTS))    
-# print('env Allowed hosts ' + str(ENV_ALLOWED_HOST))   
+ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
+ALLOWED_HOSTS = []
+if not DEBUG:
+    ALLOWED_HOSTS += [os.environ.get('DJANGO_ALLOWED_HOST')]
+print('Allowed hosts ' + str(ALLOWED_HOSTS))    
+print('env Allowed hosts ' + str(ENV_ALLOWED_HOST))   
 
 # Application definition
 
@@ -65,7 +64,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'etx_demo.urls'
 LOGIN_URL = '/login/'
 
-ADMINS = [('Demo Admin', 'test@test.com'),]
 
 TEMPLATES = [
     {
